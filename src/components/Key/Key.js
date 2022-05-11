@@ -1,13 +1,32 @@
-const Key = ({ text, big = false, disabled, actionOnClick }) => {
+import { useDispatch } from "react-redux";
+import {
+  addDigitActionCreator,
+  removeAllDigitsActionCreator,
+} from "../../redux/features/phoneSlice";
+
+const Key = ({ text, big = false, disabled }) => {
+  const dispatch = useDispatch();
+
   return (
     <li>
-      <button
-        className={`key${big ? " big" : ""}`}
-        onClick={actionOnClick}
-        disabled={disabled}
-      >
-        {text}
-      </button>
+      {!big && (
+        <button
+          className="key"
+          onClick={() => dispatch(addDigitActionCreator(text))}
+          disabled={disabled}
+        >
+          {text}
+        </button>
+      )}
+      {big && (
+        <button
+          className="key big"
+          onClick={() => dispatch(removeAllDigitsActionCreator)}
+          disabled={disabled}
+        >
+          {text}
+        </button>
+      )}
     </li>
   );
 };
