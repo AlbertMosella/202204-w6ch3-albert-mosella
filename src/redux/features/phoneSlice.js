@@ -16,10 +16,16 @@ const phoneSlice = createSlice({
     }),
     removeAllDigits: (state) => ({
       ...state,
-      numbers: [],
+      numbers: "",
     }),
-    call: (state) => [...state, (state.calling = true)],
-    hang: (state) => [...state, (state.calling = false)],
+    call: (state) => ({
+      ...state,
+      calling: true,
+    }),
+    hang: (state) => ({
+      ...state,
+      calling: false,
+    }),
   },
 });
 
