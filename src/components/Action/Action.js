@@ -1,7 +1,12 @@
+import { useDispatch } from "react-redux";
+import { callActionCreator } from "../../redux/features/phoneSlice";
+
 const Action = ({ action, isActive, actionOnClick }) => {
+  const dispatch = useDispatch();
   const clickAnchor = (event) => {
     event.preventDefault();
     actionOnClick();
+    dispatch(callActionCreator);
   };
 
   return (
