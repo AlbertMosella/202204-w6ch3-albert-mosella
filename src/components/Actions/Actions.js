@@ -11,6 +11,19 @@ const Actions = () => {
   const dispatch = useDispatch();
   const { calling, numbers } = useSelector((state) => state.phone);
 
+  const phoneCallOn = (event) => {
+    event.preventDefault();
+    if (numbers.lenght < 9) {
+      return;
+    }
+    dispatch(callActionCreator());
+  };
+
+  const phoneCallOff = (event) => {
+    event.preventDefault();
+    dispatch(hangActionCreator());
+  };
+
   return (
     <>
       <Display />
@@ -18,15 +31,11 @@ const Actions = () => {
         <Action
           action="call"
           isActive={numbers.length === 9}
-          actionOnClick={() => dispatch(callActionCreator)}
+          actionOnClick={phoneCallOn}
         />
       )}
       {calling && (
-        <Action
-          action="hang"
-          isActive={true}
-          actionOnClick={() => dispatch(hangActionCreator)}
-        />
+        <Action action="hang" isActive={true} actionOnClick={phoneCallOff} />
       )}
     </>
   );
